@@ -3,12 +3,26 @@
 - sitios: 
     - https://brainful.blog/2022/01/19/enumeration-2/
 
+- sitios wordlist: 
+    - sub dominios: 
+        - https://github.com/theMiddleBlue/DNSenum/blob/master/wordlist/subdomains-top1mil-20000.txt
+
 - usando nmap
     - `-sU` scanear puertos UDP
     - `-p80` escanear puerto 80, `-p-` escanear todos los puertos
     - `-sS` tcp syn ping
     - `-v` verbose
     - `-Pn` skip ping
+    - `-A` agressive mode, muestra info mas detallada. *tratar de usar solo con los puertos descubiertos.*
+
+- Web Fuzzer (*remplazo de palabras en el url*)
+    - `wfuzz -c -z range,1-10 http://www.sitio.com/FUZZ` la palabra **FUZZ** seria remplazada por numeros del 1 al 10.
+    - `wfuzz -c -z file,palabras.txt http://www.sitio.com/FUZZ` palabra **FUZZ** seria remplazada por las palabras dentro del archivo.
+    - con la opcion `--sc` fitramoslos resultados, p.e. `--sc 200` solo muestra los resultados con *200 OK.f* 
+    - `-c` muestra la salida con colores
+    - `-w palabras.txt` lo mismo q usar file,palabras.txt
+    - `-L` seguir redirecciones.
+    - `-H` header p.e. `-H "Host: FUZZ.sitio.htb"
 
 - Reverse shell
     - si se puede subir archivos al sitio se usa un [simple webshell](https://gist.github.com/joswr1ght/22f40787de19d80d110b37fb79ac3985#file-easy-simple-php-webshell-php)
@@ -46,4 +60,15 @@
         - `export PATH=/tmp:$PATH`
         - en /tmp suplantamos el nombe de un commando asi cuando
         se llame a ese comando ejecutara el commando en /tmp.
+
+
+- Dump memory
+    - `gdb -p <FTP_PROCESS_PID>`
+    - `(gdb) info proc mappings`
+    - `(gdb) q`
+    - `(gdb) dump memory /tmp/mem_ftp <START_HEAD> <END_HEAD>`
+    - `(gdb) q`
+    - `strings /tmp/mem_ftp #User and password` <- buscar strings
+
+
 
