@@ -1,7 +1,11 @@
 # Buscar vulnerabilities en Servidores Web.
 
-- Nikto
-    - `nikto -h example.com`
+1. Usar nikto para buscar vulns 
+    -`nikto -h example.com`
+1. Buscar directorios y subdominios con un web fuzzer.
+    - `wfuzz -c -w directorios.txt http://www.sitio.com/FUZZ/` **importante la / del final para que busque directorios y no archivos.**
+    - `wfuzz -c -w subnominios.txt http://www.sitio.com -H "Host: FUZZ.sitio.com"
+
 
 - Web Fuzzer (*remplazo de palabras en el url*)
     - `wfuzz -c -z range,1-10 http://www.sitio.com/FUZZ` la palabra **FUZZ** seria remplazada por numeros del 1 al 10.

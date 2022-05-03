@@ -9,3 +9,5 @@
     - Consultar: 
         - https://gtfobins.github.io/
         - searchsploit
+
+- https://github.com/Schlipak/rootbash/
